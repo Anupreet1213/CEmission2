@@ -19,7 +19,7 @@ const Signup = ({ setToggleAuth, setLoggedUser, setCheckUser }) => {
         const user = userCredential.user;
         setLoggedUser(user);
         setCheckUser(0);
-        console.log(user);
+        // console.log(user);
         // ...
       })
       .catch((error) => {
@@ -71,7 +71,11 @@ const Signup = ({ setToggleAuth, setLoggedUser, setCheckUser }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button className="authButton" style={{cursor:"pointer" }} onClick={handleClick}>
+        <button
+          className="authButton"
+          style={{ cursor: "pointer" }}
+          onClick={handleClick}
+        >
           SIGN UP
         </button>
         <div>
@@ -80,7 +84,12 @@ const Signup = ({ setToggleAuth, setLoggedUser, setCheckUser }) => {
           </h4>
           <h4
             onClick={() => setToggleAuth(false)}
-            style={{ display: "inline", color: "#165A4A", fontWeight: "500",cursor:"pointer"  }}
+            style={{
+              display: "inline",
+              color: "#165A4A",
+              fontWeight: "500",
+              cursor: "pointer",
+            }}
           >
             Log In
           </h4>

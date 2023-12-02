@@ -99,7 +99,7 @@ const Result = ({
           <div className="carbonEmissionResult">
             <div style={{ marginTop: "59%" }}>
               <p>Your Average Carbon Emission is :</p>
-              <h1> 20 tonnes</h1>
+              <h1> {0.2 + Math.random() * (5 - 0.2)} tonnes</h1>
             </div>
           </div>
         </div>

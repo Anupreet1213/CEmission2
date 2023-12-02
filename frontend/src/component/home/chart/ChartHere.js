@@ -96,7 +96,7 @@ const ChartHere = ({ loggedUser }) => {
       );
 
       const querySnapshot = await getDocs(q);
-      console.log(querySnapshot);
+      // console.log(querySnapshot);
       const userinfo = [];
       const userinfo2 = [];
       // const xNo = [];
@@ -114,9 +114,7 @@ const ChartHere = ({ loggedUser }) => {
           {
             label: "Carbon Emissions",
             backgroundColor: "#165A4A",
-            data: userinfo.flatMap((innerArr) =>
-              innerArr.map(({ op }) => op[0])
-            ),
+            data: userinfo.flatMap((innerArr) => innerArr.map(({ op }) => op)),
           },
         ],
       });

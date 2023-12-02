@@ -5,7 +5,7 @@ import Question from "../questions/Individual/Question";
 import IndustryQuestion from "../questions/Industry/IndustryQuestion";
 import Main from "./Main";
 
-const Home = ({ loggedUser, setCheckUser }) => {
+const Home = ({ loggedUser, setCheckUser, checkUser, setLoggedUser }) => {
   // Effect for animation on scroll using AOS
   useEffect(() => {
     AOS.init({ duration: 1000 });
@@ -28,6 +28,8 @@ const Home = ({ loggedUser, setCheckUser }) => {
           setHomeQuestion={setHomeQuestion}
           loggedUser={loggedUser}
           setCheckUser={setCheckUser}
+          checkUser={checkUser}
+          setLoggedUser={setLoggedUser}
         />
       )}
     </div>

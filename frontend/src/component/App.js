@@ -17,7 +17,12 @@ function App() {
         <Auth setLoggedUser={setLoggedUser} />
       )} */}
       {checkUser === 0 ? (
-        <Home setCheckUser={setCheckUser} loggedUser={loggedUser} />
+        <Home
+          setCheckUser={setCheckUser}
+          loggedUser={loggedUser}
+          checkUser={checkUser}
+          setLoggedUser={setLoggedUser}
+        />
       ) : (
         <Auth setCheckUser={setCheckUser} setLoggedUser={setLoggedUser} />
       )}

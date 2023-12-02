@@ -19,9 +19,15 @@ import MessageParser from "./Chatbot/MessageParser";
 import "react-chatbot-kit/build/main.css";
 import ChartHere from "./chart/ChartHere";
 import { collection, getDocs, query, where } from "firebase/firestore";
-import { db } from "../firebase";
+import auth, { db } from "../firebase";
 
-const Main = ({ setHomeQuestion, loggedUser, setCheckUser }) => {
+const Main = ({
+  setHomeQuestion,
+  loggedUser,
+  setCheckUser,
+  checkUser,
+  setLoggedUser,
+}) => {
   const [userInfo, setUserInfo] = useState([]);
   const [userInfoIndustry, setUserInfoIndustry] = useState([]);
   const [contact, setContact] = useState("");
@@ -65,6 +71,19 @@ const Main = ({ setHomeQuestion, loggedUser, setCheckUser }) => {
 
   const handleClick6 = () => {
     alert("Succesfully Signed Up For Our Newsletter");
+  };
+
+  const handleLogout = () => {
+    auth
+      .signOut()
+      .then(() => {
+        setCheckUser(0);
+        setLoggedUser("");
+        console.log("Logout successful");
+      })
+      .catch((error) => {
+        console.error("Logout error:", error);
+      });
   };
 
   // const notify = () =>
@@ -136,7 +155,20 @@ const Main = ({ setHomeQuestion, loggedUser, setCheckUser }) => {
               <a className="navLinks">MY FOOTPRINT</a>
             </Link>
             {loggedUser ? (
-              <></>
+              <div
+                style={{
+                  backgroundColor: "#165a4a",
+                  padding: "1rem 1.5rem",
+                  cursor: "pointer",
+                  borderRadius: "5px",
+                  color: "white",
+                  fontFamily: "Poppins, sans-serif",
+                  fontSize: "18px",
+                }}
+                onClick={handleLogout}
+              >
+                LOGOUT
+              </div>
             ) : (
               <div
                 style={{
