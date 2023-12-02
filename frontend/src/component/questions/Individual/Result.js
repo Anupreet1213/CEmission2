@@ -87,18 +87,19 @@ const Result = ({
               duration : {inArr[5]}
             </p>
             <p className="resultInputEachInfo">
-              Recycled newspapers past year : {inArr[6]==='0' ?"❌": "✅"}
+              Recycled newspapers past year : {inArr[6] === "0" ? "❌" : "✅"}
             </p>
             <p className="resultInputEachInfo">
-              Recycled Aluminium & Tin past year : {inArr[7]==='0' ? "❌": "✅"}
+              Recycled Aluminium & Tin past year :{" "}
+              {inArr[7] === "0" ? "❌" : "✅"}
             </p>
           </div>
         </div>
         <div className="resultRight">
           <div className="carbonEmissionResult">
-           <div style={{marginTop:"59%"}}>
-            <p>Your Average Carbon Emission is :</p>
-            <h1> {opArr[0]} tonnes</h1>
+            <div style={{ marginTop: "59%" }}>
+              <p>Your Average Carbon Emission is :</p>
+              <h1> 20 tonnes</h1>
             </div>
           </div>
         </div>

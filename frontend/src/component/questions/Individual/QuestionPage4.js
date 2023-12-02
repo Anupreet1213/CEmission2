@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
-import TextField from "@mui/material/TextField";
+import React from "react";
+// import TextField from "@mui/material/TextField";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import Checkbox from "@mui/material/Checkbox";
+// import Checkbox from "@mui/material/Checkbox";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   collection,
-  addDoc,
+  // addDoc,
   getDocs,
   query,
   where,
   arrayUnion,
   updateDoc,
   doc,
-  serverTimestamp,
-  FieldValue,
+  addDoc,
+  // serverTimestamp,
+  // FieldValue,
 } from "firebase/firestore";
 import { db } from "../../firebase";
 
@@ -42,74 +43,83 @@ const QuestionPage4 = ({
   let userinfo = {};
   let userId = "";
 
-  // const [callApi, setCallApi] = useState("");
-
-  // const description = [1000, 1000, 1200, 10000, 4, 4, 0, 0];
-
   const handleClick = async () => {
-    if (!newspaper || !tin) {
-      notify();
-    } else {
+    try {
+      if (!newspaper || !tin) {
+        notify();
+        return;
+      }
+
       setToggleQuestion(5);
       setToggleResult(1);
-      // setCallApi("1");
-    }
 
-    // useEffect(async () => {
-    const api = "http://127.0.0.1:5000/query1";
-    // console.log(loggedUser);
+      const api = "http://127.0.0.1:5000/query1";
 
-    inArr.push(eBill);
-    inArr.push(gBill);
-    inArr.push(oBill);
-    inArr.push(carMileage);
-    inArr.push(flight);
-    inArr.push(flight2);
-    inArr.push(newspaper);
-    inArr.push(tin);
-    inArr = inArr.slice(inArr.length - 8, inArr.length + 1);
-    finalInArr = inArr;
+      inArr.push(eBill);
+      inArr.push(gBill);
+      inArr.push(oBill);
+      inArr.push(carMileage);
+      inArr.push(flight);
+      inArr.push(flight2);
+      inArr.push(newspaper);
+      inArr.push(tin);
+      inArr = inArr.slice(inArr.length - 8, inArr.length + 1);
+      finalInArr = inArr;
 
-    const q = query(
-      collection(db, "userinfo"),
-      where("email", "==", loggedUser.email)
-    );
+      const q = query(
+        collection(db, "userinfo"),
+        where("email", "==", loggedUser.email)
+      );
 
-    const querySnapshot = await getDocs(q);
-    console.log(querySnapshot);
-    querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      // console.log(doc.id, " => ", doc.data());
-      userinfo = doc.data();
-      userId = doc.id;
-    });
+      const querySnapshot = await getDocs(q);
 
-    const washingtonRef = doc(db, "userinfo", userId);
-    console.log(`final array -> ${finalInArr}`);
+      if (querySnapshot.empty) {
+        // If the userinfo document doesn't exist, create it
+        const newDocRef = await addDoc(collection(db, "userinfo"), {
+          email: loggedUser.email,
+        });
 
-    const response = await fetch(`${api}?description=${finalInArr}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+        userId = newDocRef.id;
+      } else {
+        // If userinfo document exists, extract the user ID
+        querySnapshot.forEach((doc) => {
+          userinfo = doc.data();
+          userId = doc.id;
+        });
+      }
 
-    let sno = 1;
+      const washingtonRef = doc(db, "userinfo", userId);
 
-    // 3) parse response
-    await response.json().then(async (value) => {
-      setOpArr(value);
+      //This portion is when we use a ML model
+      /*
+      const response = await fetch(`${api}?description=${finalInArr}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+  
+      const value = await response.json();
+  
       await updateDoc(washingtonRef, {
         info: arrayUnion({
           in: finalInArr,
-          // timestamp: new Date().getUTCMonth() + 1,
           op: value,
         }),
-        //
       });
-    });
+      */
 
-    // Set the "capital" field of the city 'DC'
+      // For testing purposes, using a static value instead of getting from ML model
+      setOpArr("20");
+      await updateDoc(washingtonRef, {
+        info: arrayUnion({
+          in: finalInArr,
+          op: 20,
+        }),
+      });
+    } catch (error) {
+      console.error("Error in handleClick:", error);
+    }
   };
 
   const notify = () =>

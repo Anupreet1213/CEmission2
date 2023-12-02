@@ -10,17 +10,12 @@ const Options = (props) => {
   const { setState, steps, loggedUser, setCheckUser } = props;
 
   const handleClick = (widget) => {
-
-    
     const message = createClientMessage(widget, { widget });
-    
+
     setState((prevState) => ({
       ...prevState,
       messages: [...prevState.messages, message],
     }));
-    
-    
-
   };
 
   const scrollWidthOffset2 = (el) => {
@@ -49,24 +44,24 @@ const Options = (props) => {
     <BrowserRouter>
       <div className="options-container">
         <button
-          className="option-button"
+          className="option-button butt-9"
           onClick={() => handleClick("Web Assistance")}
         >
-          Web Assistance
+          <span>Web Assistance</span>
         </button>
         <Link to="#history" scroll={(el) => scrollWidthOffset2(el)}>
           <button
-            className="option-button"
-            // onClick={() => handleClick("history")}
+            className="option-button butt-9"
+            onClick={() => handleClick("Check Previous Records")}
           >
-            Check Previous Records
+            <span>Check Previous Records</span>
           </button>
         </Link>
         <button
-          className="option-button"
+          className="option-button butt-9"
           onClick={() => handleClick("Rate Your Experience")}
         >
-          Rate Your Experience
+          <span>Rate Your Experience</span>
         </button>
       </div>
     </BrowserRouter>

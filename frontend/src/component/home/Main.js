@@ -10,67 +10,31 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { HashLink as Link } from "react-router-hash-link";
 import { BrowserRouter } from "react-router-dom";
 import CalculateSection from "./CalculateSection";
-import { ToastContainer, toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import Chatbot from "./Chatbot/Chatbot";
 import config from "./Chatbot/config";
 import { Chatbot } from "react-chatbot-kit";
 import ActionProvider from "./Chatbot/ActionProvider";
 import MessageParser from "./Chatbot/MessageParser";
 import "react-chatbot-kit/build/main.css";
-
 import ChartHere from "./chart/ChartHere";
-
-import {
-  collection,
-  addDoc,
-  getDocs,
-  query,
-  where,
-  arrayUnion,
-  updateDoc,
-  doc,
-  serverTimestamp,
-} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../firebase";
 
-const Main = ({
-  setHomeQuestion,
-  homeQuestion,
-  userinfo,
-  loggedUser,
-  setCheckUser,
-}) => {
+const Main = ({ setHomeQuestion, loggedUser, setCheckUser }) => {
   const [userInfo, setUserInfo] = useState([]);
   const [userInfoIndustry, setUserInfoIndustry] = useState([]);
   const [contact, setContact] = useState("");
   const [chatBotToggle, setChatBotToggle] = useState(0);
-  const [botIcon, setBotIcon] = useState(0);
 
-  const scrollWidthOffset = (el) => {
-    const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
-    const yOffset = -200;
-    window.scrollTo({ top: yCoordinate + yOffset, behavior: "smooth" });
-  };
-
+  // For better animation on scroll when a navbar element is used(clicked)
   const scrollWidthOffset2 = (el) => {
     const yCoordinate = el.getBoundingClientRect().top + window.pageYOffset;
     const yOffset = -20;
     window.scrollTo({ top: yCoordinate + yOffset, behavior: "smooth" });
   };
 
-  window.onscroll = function () {
-    const mainDiv = document.getElementById("mainDiv");
-    if (
-      document.body.scrollTop >= 30 ||
-      document.documentElement.scrollTop >= 30
-    ) {
-      mainDiv.classList.add("scroll");
-    } else {
-      mainDiv.classList.remove("scroll");
-    }
-  };
-
+  // Get history of users from firestore database
   const handleClick3 = async () => {
     const q = query(
       collection(db, "userinfo"),
@@ -80,23 +44,10 @@ const Main = ({
     setOpen(true);
 
     const querySnapshot = await getDocs(q);
-    // console.log(querySnapshot);
     querySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      // console.log(doc.id, " => ", doc.data());
       setUserInfo(doc.data().info.reverse());
       setUserInfoIndustry(doc.data().info2.reverse());
-      // if (doc.data().info.timestamp === 2) {
-      //   console.log('febArr');
-      //   setFebArr(doc.data().info.reverse());
-      // }
-      console.log(doc.data().info);
-      // setUserInfo(userInfo.reverse());
-      // userId = doc.id;
     });
-    // console.log("====================================");
-    // console.log(febArr);
-    // console.log("====================================");
   };
 
   const handleClick4 = () => {
@@ -109,36 +60,36 @@ const Main = ({
 
   const handleClick5 = () => {
     setChatBotToggle((prev) => (prev === 0 ? 1 : 0));
-    setBotIcon((prev) => (prev === 0 ? 1 : 0));
+    // setBotIcon((prev) => (prev === 0 ? 1 : 0));
   };
 
   const handleClick6 = () => {
     alert("Succesfully Signed Up For Our Newsletter");
   };
 
-  const notify = () =>
-    toast.error("Please fill in all details", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+  // const notify = () =>
+  //   toast.error("Please fill in all details", {
+  //     position: "top-center",
+  //     autoClose: 2000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "light",
+  //   });
 
-  const notify2 = () =>
-    toast.error("Please fill in all details", {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
+  // const notify2 = () =>
+  //   toast.error("Please fill in all details", {
+  //     position: "top-center",
+  //     autoClose: 2000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: true,
+  //     progress: undefined,
+  //     theme: "light",
+  //   });
 
   const [open, setOpen] = useState(false);
 
@@ -274,7 +225,7 @@ const Main = ({
               marginLeft: "auto",
               marginRight: "auto",
               width: "80%",
-              fontSize: "20px",
+              // fontSize: "20px",
               // fontWeight:"550"
               lineHeight: "1.2",
             }}
@@ -401,11 +352,7 @@ const Main = ({
               userInfo={userInfo}
               userInfoIndustry={userInfoIndustry}
             />
-            <button
-              // style={{ marginLeft: "90%", marginTop: "2%" }}
-              className="butt-10"
-              onClick={handleClick3}
-            >
+            <button className="butt-10" onClick={handleClick3}>
               Show History
             </button>
           </>
