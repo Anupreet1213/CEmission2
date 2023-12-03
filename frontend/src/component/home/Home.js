@@ -28,7 +28,6 @@ const Home = ({ loggedUser, setCheckUser, checkUser, setLoggedUser }) => {
           setHomeQuestion={setHomeQuestion}
           loggedUser={loggedUser}
           setCheckUser={setCheckUser}
-          checkUser={checkUser}
           setLoggedUser={setLoggedUser}
         />
       )}

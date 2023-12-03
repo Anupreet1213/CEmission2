@@ -41,30 +41,30 @@ const Options = (props) => {
   };
 
   return (
-    <BrowserRouter>
-      <div className="options-container">
-        <button
-          className="option-button butt-9"
-          onClick={() => handleClick("Web Assistance")}
-        >
-          <span>Web Assistance</span>
-        </button>
-        <Link to="#history" scroll={(el) => scrollWidthOffset2(el)}>
-          <button
-            className="option-button butt-9"
-            onClick={() => handleClick("Check Previous Records")}
-          >
-            <span>Check Previous Records</span>
-          </button>
-        </Link>
-        <button
-          className="option-button butt-9"
-          onClick={() => handleClick("Rate Your Experience")}
-        >
-          <span>Rate Your Experience</span>
-        </button>
-      </div>
-    </BrowserRouter>
+    // <BrowserRouter>
+    <div className="options-container">
+      <button
+        className="option-button butt-9"
+        onClick={() => handleClick("Web Assistance")}
+      >
+        <span>Web Assistance</span>
+      </button>
+      {/* <Link to="#history" scroll={(el) => scrollWidthOffset2(el)}> */}
+      <button
+        className="option-button butt-9"
+        onClick={() => handleClick("Check Previous Records")}
+      >
+        <span>Check Previous Records</span>
+      </button>
+      {/* </Link> */}
+      <button
+        className="option-button butt-9"
+        onClick={() => handleClick("Rate Your Experience")}
+      >
+        <span>Rate Your Experience</span>
+      </button>
+    </div>
+    // </BrowserRouter>
   );
 };
 

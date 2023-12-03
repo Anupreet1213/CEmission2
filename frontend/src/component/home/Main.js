@@ -1,16 +1,14 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import leafImage from "../questions/images/leaf.png";
 import logo_v2_1 from "../questions/logo_v2_1.png";
 import linkedIn from "../questions/images/linkedin.png";
 import twitter from "../questions/images/twitter.png";
 import facebook from "../questions/images/facebook.png";
 import instagram from "../questions/images/instagram.png";
-import Dilogue from "./Dilogue";
+import Dialog from "./Dialog";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { HashLink as Link } from "react-router-hash-link";
-import { BrowserRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import CalculateSection from "./CalculateSection";
-// import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import config from "./Chatbot/config";
 import { Chatbot } from "react-chatbot-kit";
@@ -21,17 +19,14 @@ import ChartHere from "./chart/ChartHere";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import auth, { db } from "../firebase";
 
-const Main = ({
-  setHomeQuestion,
-  loggedUser,
-  setCheckUser,
-  checkUser,
-  setLoggedUser,
-}) => {
+const Main = ({ setHomeQuestion, loggedUser, setCheckUser, setLoggedUser }) => {
   const [userInfo, setUserInfo] = useState([]);
   const [userInfoIndustry, setUserInfoIndustry] = useState([]);
   const [contact, setContact] = useState("");
   const [chatBotToggle, setChatBotToggle] = useState(0);
+  const [scrolling, setScrolling] = useState(false);
+
+  const navigate = useNavigate();
 
   // For better animation on scroll when a navbar element is used(clicked)
   const scrollWidthOffset2 = (el) => {
@@ -73,6 +68,13 @@ const Main = ({
     alert("Succesfully Signed Up For Our Newsletter");
   };
 
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const handleLogout = () => {
     auth
       .signOut()
@@ -85,6 +87,22 @@ const Main = ({
         console.error("Logout error:", error);
       });
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // const notify = () =>
   //   toast.error("Please fill in all details", {
@@ -132,72 +150,89 @@ const Main = ({
         </div>
       </nav> */}
 
-      <BrowserRouter>
-        <header>
-          {/* <h3>LOGO</h3> */}
-          {/* <img className="logo_v2_1" src={logo_v2_1} alt="React Logo" /> */}
-          <div className="navbarImage">
-            <img
-              className="logo_v2_1"
-              src={logo_v2_1}
-              style={{ width: "80%" }}
-              alt="React Logo"
-            />
-          </div>
-          <nav ref={navRef}>
-            <Link to="#home">
-              <a className="navLinks">HOME</a>
-            </Link>
-            <Link to="#calculate" scroll={(el) => scrollWidthOffset2(el)}>
-              <a className="navLinks">CALCULATE</a>
-            </Link>
-            <Link to="#history" scroll={(el) => scrollWidthOffset2(el)}>
-              <a className="navLinks">MY FOOTPRINT</a>
-            </Link>
-            {loggedUser ? (
-              <div
-                style={{
-                  backgroundColor: "#165a4a",
-                  padding: "1rem 1.5rem",
-                  cursor: "pointer",
-                  borderRadius: "5px",
-                  color: "white",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "18px",
-                }}
-                onClick={handleLogout}
-              >
-                LOGOUT
-              </div>
-            ) : (
-              <div
-                style={{
-                  backgroundColor: "#165a4a",
-                  padding: "1rem 1.5rem",
-                  cursor: "pointer",
-                  borderRadius: "5px",
-                  color: "white",
-                  fontFamily: "Poppins, sans-serif",
-                  fontSize: "18px",
-                }}
-                onClick={() => setCheckUser(1)}
-              >
-                LOGIN/SIGNUP
-              </div>
-            )}
+      <header className={scrolling ? "navBarScrolled" : ""}>
+        {/* <h3>LOGO</h3> */}
+        {/* <img className="logo_v2_1" src={logo_v2_1} alt="React Logo" /> */}
+        <div className="navbarImage">
+          <img
+            className="logo_v2_1"
+            src={logo_v2_1}
+            style={{ width: "80%" }}
+            alt="React Logo"
+          />
+        </div>
+        <nav ref={navRef}>
+          {/* <Link to="#home"> */}
+          <span
+            className={scrolling ? "navLinksScroll" : "navLinks"}
+            onClick={() => scrollToSection("home")}
+          >
+            HOME
+          </span>
+          {/* </Link> */}
+          {/* <Link to="#calculate" scroll={(el) => scrollWidthOffset2(el)}> */}
+          <span
+            className={scrolling ? "navLinksScroll" : "navLinks"}
+            onClick={() => scrollToSection("calculate")}
+          >
+            CALCULATE
+          </span>
+          {/* </Link> */}
+          {/* <Link to="#history" scroll={(el) => scrollWidthOffset2(el)}> */}
+          <span
+            className={scrolling ? "navLinksScroll" : "navLinks"}
+            onClick={() => scrollToSection("history")}
+          >
+            MY FOOTPRINT
+          </span>
+          {/* </Link> */}
+          {loggedUser ? (
+            <div
+              style={{
+                backgroundColor: "#165a4a",
+                padding: "1rem 1.5rem",
+                cursor: "pointer",
+                borderRadius: "5px",
+                color: "white",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "18px",
+                transition: "background-color 0.3s",
+                ":hover": {
+                  backgroundColor: "#134336",
+                },
+              }}
+              onClick={handleLogout}
+            >
+              LOGOUT
+            </div>
+          ) : (
+            <div
+              style={{
+                backgroundColor: "#165a4a",
+                padding: "1rem 1.5rem",
+                cursor: "pointer",
+                borderRadius: "5px",
+                color: "white",
+                fontFamily: "Poppins, sans-serif",
+                fontSize: "18px",
+              }}
+              onClick={() => navigate("/auth")}
+            >
+              LOGIN/SIGNUP
+            </div>
+          )}
 
-            {/* <a href="/#">About me</a> */}
-            <button className="nav-btn nav-close-btn" onClick={showNavbar}>
-              <FaTimes />
-            </button>
-          </nav>
-          <button className="nav-btn" onClick={showNavbar}>
-            <FaBars />
+          {/* <a href="/#">About me</a> */}
+          <button className="nav-btn nav-close-btn" onClick={showNavbar}>
+            <FaTimes />
           </button>
-        </header>
-      </BrowserRouter>
+        </nav>
+        <button className="nav-btn" onClick={showNavbar}>
+          <FaBars />
+        </button>
+      </header>
 
-      <div className="mainFirst">
+      <div className="mainFirst" id="home">
         <div className="mainFirstDiv">
           <h1 className="mainFirstDivHeading1">ITS TIME TO</h1>
           <h1 className="mainFirstDivHeading2">OFFSET YOUR</h1>
@@ -376,7 +411,7 @@ const Main = ({
         )}
         {loggedUser ? (
           <>
-            <Dilogue
+            <Dialog
               setOpen={setOpen}
               open={open}
               loggedUser={loggedUser}

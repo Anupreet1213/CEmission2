@@ -67,6 +67,7 @@ const Question = ({ setHomeQuestion, loggedUser }) => {
           setOpArrIndustry={setOpArrIndustry}
           inArr={inArr}
           finalInArr={finalInArr}
+          opArrIndustry={opArrIndustry}
         />
       ) : (
         <IndustryResult

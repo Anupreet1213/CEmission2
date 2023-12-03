@@ -4,10 +4,13 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import auth from "../firebase";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ setToggleAuth, setLoggedUser, setCheckUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleClick = () => {
     signInWithEmailAndPassword(auth, email, password)
@@ -17,6 +20,7 @@ const Login = ({ setToggleAuth, setLoggedUser, setCheckUser }) => {
         const user = userCredential.user;
         setLoggedUser(user);
         setCheckUser(0);
+        navigate("/");
         // console.log("Helluu");
         // console.log(user);
         // ...

@@ -1,11 +1,15 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const CalculateSection = ({ loggedUser, setCheckUser, setHomeQuestion }) => {
+  const navigate = useNavigate();
+
   const handleClick = () => {
     if (loggedUser) {
       setHomeQuestion(1);
     } else {
       setCheckUser(1);
+      navigate("/auth");
     }
   };
 
@@ -14,6 +18,7 @@ const CalculateSection = ({ loggedUser, setCheckUser, setHomeQuestion }) => {
       setHomeQuestion(2);
     } else {
       setCheckUser(1);
+      navigate("/auth");
     }
   };
 

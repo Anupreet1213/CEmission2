@@ -73,7 +73,7 @@ const QuestionPage1 = ({
         <div className="questionElectricity">
           <h1>How much is your monthly Electricity Bill?</h1>
           <TextField
-            style={{ width: "30%", margin: "3%" }}
+            style={{ width: "20vw", margin: "3%" }}
             id="filled-basic"
             label="Rs."
             variant="filled"
@@ -86,7 +86,7 @@ const QuestionPage1 = ({
         <div className="questionGas">
           <h1>How much is your monthly Gas Bill?</h1>
           <TextField
-            style={{ width: "30%", margin: "3%" }}
+            style={{ width: "20vw", margin: "3%" }}
             id="filled-basic"
             label="Rs."
             variant="filled"

@@ -34,6 +34,7 @@ const IndustryQuestionPage4 = ({
   finalInArr,
   loggedUser,
   setOpArrIndustry,
+  opArrIndustry,
 }) => {
   let userinfo = {};
   let userId = "";
@@ -73,21 +74,28 @@ const IndustryQuestionPage4 = ({
     });
 
     const washingtonRef = doc(db, "userinfo", userId);
-    console.log(`final array -> ${finalInArr}`);
+    // console.log(`final array -> ${finalInArr}`);
 
-    const response = await fetch(`${api}?description=${finalInArr}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    // const response = await fetch(`${api}?description=${finalInArr}`, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
 
     // 3) parse response
-    await response.json().then(async (value) => {
-      setOpArrIndustry(value);
-      await updateDoc(washingtonRef, {
-        info2: arrayUnion({ in: finalInArr, timestamp: new Date(), op: value }),
-      });
+    // await response.json().then(async (value) => {
+    //   setOpArrIndustry(value);
+    //   await updateDoc(washingtonRef, {
+    //     info2: arrayUnion({ in: finalInArr, timestamp: new Date(), op: value }),
+    //   });
+    // });
+    setOpArrIndustry((0.2 + Math.random() * (5 - 0.2)).toFixed(2));
+    await updateDoc(washingtonRef, {
+      info2: arrayUnion({
+        in: finalInArr,
+        op: opArrIndustry[0],
+      }),
     });
 
     const notify = () =>

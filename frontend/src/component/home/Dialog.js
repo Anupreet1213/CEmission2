@@ -20,7 +20,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Drawer } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-const Dilogue = ({
+const Dialog = ({
   loggedUser,
   setCheckUser,
   open,
@@ -92,12 +92,13 @@ const Dilogue = ({
     borderBottomLeftRadius: 20,
     borderTopRightRadius: 20,
     borderBottomRightRadius: 20,
-    display:'flex',
-    paddingTop:"2.5rem",
-    alignItems: 'center',
+    display: "flex",
+    paddingTop: "2.5rem",
+    alignItems: "center",
     // backgroundColor: "#ffffff",
     backgroundColor: "rgb(108,184,166)",
-background: "linear-gradient(128deg, rgba(108,184,166,1) 0%, rgba(108,184,166,1) 35%, rgba(96,223,147,1) 100%)",
+    background:
+      "linear-gradient(128deg, rgba(108,184,166,1) 0%, rgba(108,184,166,1) 35%, rgba(96,223,147,1) 100%)",
 
     boxShadow: "none",
     "@media(max-width: 1080px)": {
@@ -120,16 +121,26 @@ background: "linear-gradient(128deg, rgba(108,184,166,1) 0%, rgba(108,184,166,1)
       onClose={() => setOpen(false)}
       PaperProps={{ sx: drawerStyle }}
     >
-       {/* style={{paddingTop:"5%",paddingLeft:"auto",paddingRight:"auto"}} */}
+      {/* style={{paddingTop:"5%",paddingLeft:"auto",paddingRight:"auto"}} */}
       {/* <div className="drawerTop">
         <ArrowBackIcon className="arrowBackIcon" onClick={handleClick2} />
       </div> */}
       <div>
-          <h1 style={{marginBottom:"2rem",fontFamily:"Poppins, sans-serif",fontWeight:"600",fontSize:"36px"}}> Your Carbon Emission History</h1>
-          </div>
+        <h1
+          style={{
+            marginBottom: "2rem",
+            fontFamily: "Poppins, sans-serif",
+            fontWeight: "600",
+            fontSize: "36px",
+          }}
+        >
+          {" "}
+          Your Carbon Emission History
+        </h1>
+      </div>
       {/* {userInfo ? ( */}
       {/* userInfo.map((eachInfo) => { */}
-      <Accordion style={{width:"78vw",marginBottom:"1rem"}}>
+      <Accordion style={{ width: "78vw", marginBottom: "1rem" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -170,19 +181,19 @@ background: "linear-gradient(128deg, rgba(108,184,166,1) 0%, rgba(108,184,166,1)
                       <td style={{ fontSize: "13px" }}>
                         {eachInfo.in[7] === "0" ? "❌" : "✅"}
                       </td>
-                      <td style={{ fontSize: "13px" }}>{eachInfo.op[0]}</td>
+                      <td style={{ fontSize: "13px" }}>{eachInfo.op}</td>
                     </tr>
                   );
                 })
               ) : (
-                <div> Sorry, there's no data to display</div>
+                <div>Sorry, there's no data to display</div>
               )}
             </table>
           </div>
         </AccordionDetails>
       </Accordion>
 
-      <Accordion style={{width:"78vw"}}>
+      <Accordion style={{ width: "78vw" }}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -224,7 +235,7 @@ background: "linear-gradient(128deg, rgba(108,184,166,1) 0%, rgba(108,184,166,1)
                   );
                 })
               ) : (
-                <div> Kuch nahi hai lavde</div>
+                <div>Sorry, there's no data to display</div>
               )}
             </table>
           </div>
@@ -234,4 +245,4 @@ background: "linear-gradient(128deg, rgba(108,184,166,1) 0%, rgba(108,184,166,1)
   );
 };
 
-export default Dilogue;
+export default Dialog;

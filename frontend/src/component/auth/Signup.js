@@ -6,10 +6,13 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 const Signup = ({ setToggleAuth, setLoggedUser, setCheckUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleClick = async () => {
     // console.log(email);
@@ -19,6 +22,7 @@ const Signup = ({ setToggleAuth, setLoggedUser, setCheckUser }) => {
         const user = userCredential.user;
         setLoggedUser(user);
         setCheckUser(0);
+        navigate("/");
         // console.log(user);
         // ...
       })

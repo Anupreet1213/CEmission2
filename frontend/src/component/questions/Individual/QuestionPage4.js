@@ -110,11 +110,11 @@ const QuestionPage4 = ({
       */
 
       // For testing purposes, using a static value instead of getting from ML model
-      setOpArr("20");
+      setOpArr((0.2 + Math.random() * (5 - 0.2)).toFixed(2));
       await updateDoc(washingtonRef, {
         info: arrayUnion({
           in: finalInArr,
-          op: 20,
+          op: opArr,
         }),
       });
     } catch (error) {
