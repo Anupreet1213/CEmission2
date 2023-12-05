@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 const CalculateSection = ({ loggedUser, setCheckUser, setHomeQuestion }) => {
   const navigate = useNavigate();
-
   const handleClick = () => {
     if (loggedUser) {
       setHomeQuestion(1);
@@ -22,7 +21,6 @@ const CalculateSection = ({ loggedUser, setCheckUser, setHomeQuestion }) => {
     }
   };
 
-  // id="calculateCarbonEmission
   return (
     <section className="calculateCarbonEmission" data-aos="fade" id="calculate">
       <div className="calculateMainDiv">

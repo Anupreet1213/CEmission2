@@ -32,13 +32,12 @@ const WebAssWidget = (props) => {
   return (
     <div className="options-container">
       {/* <p>Are you an Individual or Industry?</p> */}
-      <button className="option-button" onClick={() => handleClick()}>
-        Individual
+      <button className="option-button butt-9" onClick={() => handleClick()}>
+        <span>Individual</span>
       </button>
-      <button className="option-button" onClick={() => handleClick2()}>
-        Industry
+      <button className="option-button butt-9" onClick={() => handleClick2()}>
+        <span>Industry</span>
       </button>
-      
     </div>
   );
 };

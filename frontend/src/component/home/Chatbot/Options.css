@@ -1,62 +1,59 @@
 .options-container {
-  display: flex;
-  /* flex-wrap: wrap; */
-  flex-direction: column;
-  /* justify-content: center; */
-  align-items: center;
-}
-
-.option-button {
-  margin: 5px;
-  cursor: pointer;
-  border-radius: 20px;
-  width: 14vw;
-  padding: 8px;
-  border: 1.5px solid #165a4a;
-  color: #165a4a;
-  background: transparent;
-  text-align: center;
-  font-family: "Inter", sans-serif;
-  outline: 0;
-  opacity: 1;
-  position: relative;
-  transition: opacity 300ms cubic-bezier(0.694, 0, 0.335, 1),
-    background-color 100ms cubic-bezier(0.694, 0, 0.335, 1),
-    color 100ms cubic-bezier(0.694, 0, 0.335, 1);
-}
-
+    display: flex;
+    /* flex-wrap: wrap; */
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+  }
+  
+  .option-button {
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 20px;
+    width: 14vw;
+    padding: 8px;
+    border: 1.5px solid #165a4a;
+    color: #165a4a;
+    background: transparent;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    outline: 0;
+    opacity: 1;
+    position: relative;
+    transition: opacity 300ms cubic-bezier(.694, 0, 0.335, 1),background-color 100ms cubic-bezier(.694, 0, 0.335, 1),color 100ms cubic-bezier(.694, 0, 0.335, 1);
+  }
+  
 .option-button:before {
-  animation: opacityFallbackOut 0.5s step-end forwards;
-  backface-visibility: hidden;
-  background-color: #165a4a;
-  /* color: white; */
-  border-radius: 20px;
-  clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
-  content: "";
-  height: 100%;
-  left: 0;
-  position: absolute;
-  top: 0;
-  transform: translateZ(0);
-  transition: clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1),
-    -webkit-clip-path 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-  width: 100%;
-}
-.option-button:hover span {
-  color: #eaf1f0;
-  animation: opacityFallbackIn 0s step-start forwards;
-  clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
-}
+    animation: opacityFallbackOut .5s step-end forwards;
+    backface-visibility: hidden;
+    background-color: #165a4a;
+    /* color: white; */
+    border-radius: 20px;
+    clip-path: polygon(-1% 0, 0 0, -25% 100%, -1% 100%);
+    content: "";
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transform: translateZ(0);
+    transition: clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1), -webkit-clip-path .5s cubic-bezier(.165, 0.84, 0.44, 1);
+    width: 100%;
+  }
+  .option-button:hover span{
+    color: #eaf1f0;
+    animation: opacityFallbackIn 0s step-start forwards;
+    clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
+  }
 .option-button:hover:before {
-  animation: opacityFallbackIn 0s step-start forwards;
-  clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
-  /* color: white; */
-}
+    animation: opacityFallbackIn 0s step-start forwards;
+    clip-path: polygon(0 0, 101% 0, 101% 101%, 0 101%);
+    /* color: white; */
+} 
 .option-button:after {
-  background-color: #ffffff;
-}
+    background-color: #FFFFFF;
+}  
 .option-button span {
-  z-index: 1;
-  position: relative;
-  /* color: white; */
+    z-index: 1;
+    position: relative;
+    /* color: white; */
 }

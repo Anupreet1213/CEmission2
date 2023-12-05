@@ -3,7 +3,7 @@ import TextField from "@mui/material/TextField";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import Home from "../home/Home";
+
 
 const IndustryQuestionPage1 = ({
   setToggleQuestion,
@@ -14,13 +14,15 @@ const IndustryQuestionPage1 = ({
   setParking,
 }) => {
   const handleClick = () => {
+
+    // Popup a toaster if the fields are empty else go to the next page
     if (!floor || !parking) {
       notify();
     } else {
       setToggleQuestion(2);
     }
   };
-
+  // Toaster styling :
   const notify = () =>
     toast.error("Please fill in all details", {
       position: "top-center",

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import logo from '../';
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import {
   collection,
@@ -13,43 +12,19 @@ import {
   serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../../firebase";
+import logo from '../images/logo.png';
 
 const Result = ({
   setToggleQuestion,
+  setHomeQuestion,
   loggedUser,
   finalInArr,
   opArr,
   inArr,
 }) => {
-  // let userId = "";
-
-  // const saveOP = async () => {
-  //   const q = query(
-  //     collection(db, "userinfo"),
-  //     where("email", "==", loggedUser.email)
-  //   );
-
-  //   const querySnapshot = await getDocs(q);
-  //   // console.log(querySnapshot);
-  //   querySnapshot.forEach((doc) => {
-  //     userId = doc.id;
-  //   });
-
-  //   const washingtonRef = doc(db, "userinfo", userId);
-
-  //   // Set the "capital" field of the city 'DC'
-  //   await updateDoc(washingtonRef, {
-  //     info: arrayUnion({ op: opArr }),
-  //   });
-  // };
-
-  // saveOP();
-  console.log(opArr);
-
   return (
     <div className="resultDiv">
       <ArrowBackIosIcon onClick={() => setToggleQuestion(4)} />
-      {/* <img className="resultLogo" src={logo} alt="React Logo" /> */}
       <div className="resultSubDiv">
         <div className="resultLeft">
           <h2
@@ -100,11 +75,13 @@ const Result = ({
           <div className="carbonEmissionResult">
             <div style={{ marginTop: "59%" }}>
               <p>Your Average Carbon Emission is :</p>
-              <h1> {opArr} tonnes</h1>
+              <h1> {opArr[0]} tonnes</h1>
             </div>
+            <button className="recommendButton" onClick={()=>setToggleQuestion(6)} >VIEW RECOMMENDATIONS</button>
           </div>
         </div>
       </div>
+      <img className="recLogo" src={logo} onClick={() => setHomeQuestion(3)} /> 
     </div>
   );
 };

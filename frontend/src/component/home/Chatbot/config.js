@@ -24,7 +24,7 @@ const config = {
       widgetFunc: (props) => <WebAssWidget {...props} />,
     },
     {
-      widgetName: "history",
+      widgetName: "Check Previous Records",
       widgetFunc: (props) => <HistoryWidget {...props} />,
     },
     {

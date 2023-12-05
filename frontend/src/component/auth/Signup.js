@@ -8,23 +8,30 @@ import { db } from "../firebase";
 import { collection, addDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 
-const Signup = ({ setToggleAuth, setLoggedUser, setCheckUser }) => {
+const Signup = ({ setToggleAuth, setLoggedUser, setCheckUser, loggedUser }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const navigate = useNavigate();
 
   const handleClick = async () => {
     // console.log(email);
     createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
+      .then(async (userCredential) => {
         // Signed in
         const user = userCredential.user;
         setLoggedUser(user);
         setCheckUser(0);
         navigate("/");
-        // console.log(user);
+        console.log(user);
         // ...
+        try {
+          const docRef = await addDoc(collection(db, "userinfo"), {
+            email: email,
+          });
+          console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+          console.error("Error adding document: ", e);
+        }
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -32,15 +39,6 @@ const Signup = ({ setToggleAuth, setLoggedUser, setCheckUser }) => {
         notify(warning);
         // ..
       });
-
-    try {
-      const docRef = await addDoc(collection(db, "userinfo"), {
-        email: email,
-      });
-      console.log("Document written with ID: ", docRef.id);
-    } catch (e) {
-      console.error("Error adding document: ", e);
-    }
   };
 
   const notify = (warning) =>

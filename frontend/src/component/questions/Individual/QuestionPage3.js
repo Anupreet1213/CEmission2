@@ -12,13 +12,14 @@ const QuestionPage3 = ({
   setFlight2,
 }) => {
   const handleClick = () => {
+     // Popup a toaster if the fields are empty else go to the next page
     if (!flight || !flight2) {
       notify();
     } else {
       setToggleQuestion(4);
     }
   };
-
+// Toaster styling :
   const notify = () =>
     toast.error("Please fill in all details", {
       position: "top-center",

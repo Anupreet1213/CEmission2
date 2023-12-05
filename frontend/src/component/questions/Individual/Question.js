@@ -4,8 +4,11 @@ import QuestionPage3 from "./QuestionPage3";
 import QuestionPage2 from "./QuestionPage2";
 import QuestionPage4 from "./QuestionPage4";
 import Result from "./Result";
+import Recommend from "./Recommend";
 
 const Question = ({ setHomeQuestion, loggedUser }) => {
+
+  // States maintaining all the input values :
   const [toggleQuestion, setToggleQuestion] = useState(1);
   const [eBill, setEBill] = useState("");
   const [gBill, setGBill] = useState("");
@@ -24,6 +27,7 @@ const Question = ({ setHomeQuestion, loggedUser }) => {
 
   return (
     <>
+    {/* Logic for changing Question Page on click of Next */}
       {toggleQuestion === 1 ? (
         <QuestionPage1
           setToggleQuestion={setToggleQuestion}
@@ -69,13 +73,20 @@ const Question = ({ setHomeQuestion, loggedUser }) => {
           inArr={inArr}
           finalInArr={finalInArr}
         />
-      ) : (
+      ) : toggleQuestion === 5 ? (
         <Result
           setToggleQuestion={setToggleQuestion}
           toggleResult={toggleResult}
           opArr={opArr}
           inArr={inArr}
           loggedUser={loggedUser}
+          setHomeQuestion={setHomeQuestion}
+        />
+      ) : (
+        <Recommend
+          setToggleQuestion={setToggleQuestion}
+          opArr={opArr}
+          setHomeQuestion={setHomeQuestion}
         />
       )}
     </>

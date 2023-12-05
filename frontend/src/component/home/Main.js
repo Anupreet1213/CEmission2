@@ -10,7 +10,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import CalculateSection from "./CalculateSection";
 import "react-toastify/dist/ReactToastify.css";
-import config from "./Chatbot/config";
+import config from "./Chatbot/Config";
 import { Chatbot } from "react-chatbot-kit";
 import ActionProvider from "./Chatbot/ActionProvider";
 import MessageParser from "./Chatbot/MessageParser";
@@ -104,30 +104,6 @@ const Main = ({ setHomeQuestion, loggedUser, setCheckUser, setLoggedUser }) => {
     };
   }, []);
 
-  // const notify = () =>
-  //   toast.error("Please fill in all details", {
-  //     position: "top-center",
-  //     autoClose: 2000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "light",
-  //   });
-
-  // const notify2 = () =>
-  //   toast.error("Please fill in all details", {
-  //     position: "top-center",
-  //     autoClose: 2000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "light",
-  //   });
-
   const [open, setOpen] = useState(false);
 
   const navRef = useRef();
@@ -138,21 +114,9 @@ const Main = ({ setHomeQuestion, loggedUser, setCheckUser, setLoggedUser }) => {
 
   return (
     <div id="mainDiv">
-      {/* <nav className="navBar">
-        <div className="navbarImage">
-          <img className="logo_v2_1" src={logo_v2_1} alt="React Logo" />
-        </div>
-
-        <div className="navbarRightFields">
-          <p>HOME</p>
-          <p>CALCULATE</p>
-          <p>MY FOOTPRINT</p>
-        </div>
-      </nav> */}
+     
 
       <header className={scrolling ? "navBarScrolled" : ""}>
-        {/* <h3>LOGO</h3> */}
-        {/* <img className="logo_v2_1" src={logo_v2_1} alt="React Logo" /> */}
         <div className="navbarImage">
           <img
             className="logo_v2_1"
@@ -162,30 +126,29 @@ const Main = ({ setHomeQuestion, loggedUser, setCheckUser, setLoggedUser }) => {
           />
         </div>
         <nav ref={navRef}>
-          {/* <Link to="#home"> */}
+
           <span
             className={scrolling ? "navLinksScroll" : "navLinks"}
             onClick={() => scrollToSection("home")}
           >
             HOME
           </span>
-          {/* </Link> */}
-          {/* <Link to="#calculate" scroll={(el) => scrollWidthOffset2(el)}> */}
+
           <span
             className={scrolling ? "navLinksScroll" : "navLinks"}
             onClick={() => scrollToSection("calculate")}
           >
             CALCULATE
           </span>
-          {/* </Link> */}
-          {/* <Link to="#history" scroll={(el) => scrollWidthOffset2(el)}> */}
+
+
           <span
             className={scrolling ? "navLinksScroll" : "navLinks"}
             onClick={() => scrollToSection("history")}
           >
             MY FOOTPRINT
           </span>
-          {/* </Link> */}
+
           {loggedUser ? (
             <div
               style={{
@@ -519,9 +482,6 @@ const Main = ({ setHomeQuestion, loggedUser, setCheckUser, setLoggedUser }) => {
         </div>
       </section>
 
-      {/* <button onClick={() => setHomeQuestion(1)}>
-        Question dekhne ke liye mujhe dabaye
-      </button> */}
     </div>
   );
 };

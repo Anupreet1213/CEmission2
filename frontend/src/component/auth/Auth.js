@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Login from "./Login";
 import Signup from "./Signup";
 
-const Auth = ({ setLoggedUser, setCheckUser }) => {
+const Auth = ({ setLoggedUser, setCheckUser, loggedUser }) => {
   const [toggleAuth, setToggleAuth] = useState(false);
 
   return (
@@ -12,6 +12,7 @@ const Auth = ({ setLoggedUser, setCheckUser }) => {
           setToggleAuth={setToggleAuth}
           setLoggedUser={setLoggedUser}
           setCheckUser={setCheckUser}
+          loggedUser={loggedUser}
         />
       ) : (
         <Login

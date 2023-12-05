@@ -4,8 +4,11 @@ import IndustryQuestionPage2 from "./IndustryQuestionPage2";
 import IndustryQuestionPage3 from "./IndustryQuestionPage3";
 import IndustryQuestionPage4 from "./IndustryQuestionPage4";
 import IndustryResult from "./IndustryResult";
+import RecommendIndustry from "./RecommendIndustry";
 
 const Question = ({ setHomeQuestion, loggedUser }) => {
+
+   // States maintaining all the input values :
   const [toggleQuestion, setToggleQuestion] = useState(1);
   const [floor, setFloor] = useState("");
   const [parking, setParking] = useState("");
@@ -24,6 +27,7 @@ const Question = ({ setHomeQuestion, loggedUser }) => {
 
   return (
     <>
+    {/* Logic for changing Question Page on click of Next */}
       {toggleQuestion === 1 ? (
         <IndustryQuestionPage1
           setToggleQuestion={setToggleQuestion}
@@ -67,17 +71,24 @@ const Question = ({ setHomeQuestion, loggedUser }) => {
           setOpArrIndustry={setOpArrIndustry}
           inArr={inArr}
           finalInArr={finalInArr}
-          opArrIndustry={opArrIndustry}
         />
-      ) : (
+      ) : toggleQuestion === 5 ?
+      (
         <IndustryResult
           setToggleQuestion={setToggleQuestion}
           toggleResult={toggleResult}
           opArrIndustry={opArrIndustry}
           finalInArr={finalInArr}
+          setHomeQuestion={setHomeQuestion}
           inArr={inArr}
         />
-      )}
+      ) :
+      <RecommendIndustry 
+      setToggleQuestion={setToggleQuestion}
+      opArrIndustry={opArrIndustry}
+      setHomeQuestion={setHomeQuestion}
+      />
+    }
     </>
   );
 };

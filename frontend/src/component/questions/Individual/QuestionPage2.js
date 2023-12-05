@@ -12,13 +12,14 @@ const QuestionPage2 = ({
   setCarMileage,
 }) => {
   const handleClick = () => {
+     // Popup a toaster if the fields are empty else go to the next page
     if (!oBill || !carMileage) {
       notify();
     } else {
       setToggleQuestion(3);
     }
   };
-
+// Toaster styling :
   const notify = () =>
     toast.error("Please fill in all details", {
       position: "top-center",
